@@ -1,0 +1,28 @@
+name: 'Coverlet Badge Generator'
+description: 'Convert opencover test results to badges'
+author: 'BartoszKubica'
+inputs:
+  path-to-opencover-xml:
+    description: 'Path to the open cover xml file'
+    required: true
+  path-to-badges:
+    description: 'Path where badges will be commited'
+    required: false
+  minimum-coverage:
+    description: 'Threshold percentage at which a red badge would appear'
+    required: true
+  commit-branch-name:
+    description: 'Branch name where badges are commited'
+    required: true
+  repostiory-token:
+    description: 'PAT for repository, allows to commit badge'
+    required: true
+  stop-on-minimum-coverage-failure:
+    description: 'stop action when minimum code coverage is not reached '
+    required: true  
+branding:
+  icon: 'percent'
+  color: 'blue'
+runs:
+  using: 'node12'
+  main: 'src/index.js'
