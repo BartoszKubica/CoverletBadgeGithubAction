@@ -28,9 +28,9 @@ async function generateBadge(badgeFilePath, labelName, coveragePercentage) {
     existingBadge = (await fs.readFile(badgeFilePath)).toString();
   }
 
-  await writeFile(badgeFilePath, makeBadge(format));
+  await fs.writeFile(badgeFilePath, makeBadge(format));
 
-  const generatingBadge = (await readFile(badgeFilePath)).toString();
+  const generatingBadge = (await fs.readFile(badgeFilePath)).toString();
   return generatingBadge !== existingBadge;
 }
 
