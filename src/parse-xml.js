@@ -17,4 +17,4 @@ const parseOpenCover = async function(filepath) {
   return null;
 }
 
-export default parseOpenCover;
+module.exports = parseOpenCover;
