@@ -1,10 +1,11 @@
-import { getInput, setFailed } from '@actions/core';
-import { makeBadge } from 'badge-maker';
-import { existsSync, readFile, writeFile } from 'promise-fs';
+const core = require('@actions/core');
+const { makeBadge } = require('badge-maker')
+const fs = require('promise-fs');
+
 
 async function generateBadge(badgeFilePath, labelName, coveragePercentage) {
-  const minimumCoverage = parseInt(getInput('minimum-coverage', { required: true }));
-  const stopOnMinimunCoveragefailure = getInput('stop-on-minimum-coverage-failure', { required: true });
+  const minimumCoverage = parseInt(core.getInput('minimum-coverage', { required: true }));
+  const stopOnMinimunCoveragefailure = core.getInput('stop-on-minimum-coverage-failure', { required: true });
 
   if(stopOnMinimunCoveragefailure === 'true'){
     setFailed("Minimum code coverage is not reached");
@@ -23,8 +24,8 @@ async function generateBadge(badgeFilePath, labelName, coveragePercentage) {
   };
 
   let existingBadge = '';
-  if (existsSync(badgeFilePath)) {
-    existingBadge = (await readFile(badgeFilePath)).toString();
+  if (fs.existsSync(badgeFilePath)) {
+    existingBadge = (await fs.readFile(badgeFilePath)).toString();
   }
 
   await writeFile(badgeFilePath, makeBadge(format));

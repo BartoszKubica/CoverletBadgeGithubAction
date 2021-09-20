@@ -1,19 +1,19 @@
-import { getInput, setFailed, info } from '@actions/core';
-import parseOpenCover from './parse-xml';
-import commitAndPush from './git-utils';
-import generateBadge from './generate-badge';
+const core = require('@actions/core');
+const parseOpenCover = require('./parse-xml');
+const commitAndPush = require('./git-utils');
+const generateBadge = require('./generate-badge');
 
 async function run() {
   try {
-    const openCoverFilePathInput = getInput('path-to-opencover-xml', { required: true });
-    let badgesFilePathInput = getInput('path-to-badges', { required: false });
+    const openCoverFilePathInput = core.getInput('path-to-opencover-xml', { required: true });
+    let badgesFilePathInput = core.getInput('path-to-badges', { required: false });
     if (!badgesFilePathInput) {
       badgesFilePathInput = './/';
     }
 
     const coverageResults = await parseOpenCover(openCoverFilePathInput);
     if (!coverageResults) {
-      setFailed('No coverage results could be found');
+      core.setFailed('No coverage results could be found');
     }
 
     const lineBadgePath = `${badgesFilePathInput}//coverage-badge-line.svg`.replace(/\/\/\/\//g, '//');
@@ -36,12 +36,12 @@ async function run() {
         branchBadgePath
       ]);
     } else {
-      info('No new badges were created')
+      core.info('No new badges were created')
     }
 
-    info('Action successful');
+    core.info('Action successful');
   } catch (error) {
-    setFailed(error.message);
+    core.setFailed(error.message);
   }
 }
 
