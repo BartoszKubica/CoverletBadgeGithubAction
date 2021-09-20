@@ -34,4 +34,4 @@ async function generateBadge(badgeFilePath, labelName, coveragePercentage) {
   return generatingBadge !== existingBadge;
 }
 
-export default generateBadge;
+module.exports = generateBadge;
