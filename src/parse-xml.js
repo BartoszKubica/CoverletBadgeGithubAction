@@ -1,8 +1,8 @@
-import Parser from 'xml2js-parser';
-import { readFile } from 'promise-fs';
+const Parser = require('xml2js-parser');
+const fs = require('promise-fs');
 
 const parseOpenCover = async function(filepath) {
-  const content = await readFile(filepath);
+  const content = await fs.readFile(filepath);
   if (content.length > 0) {
     const parser = new Parser({});
     const result = await parser.parseString(content);
