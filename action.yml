@@ -14,7 +14,7 @@ inputs:
   commit-branch-name:
     description: 'Branch name where badges are commited'
     required: true
-  repostiory-token:
+  repository-token:
     description: 'PAT for repository, allows to commit badge'
     required: true
   stop-on-minimum-coverage-failure:
