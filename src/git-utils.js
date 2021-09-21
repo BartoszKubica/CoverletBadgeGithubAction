@@ -2,7 +2,7 @@ const exec = require('@actions/exec');
 const core = require('@actions/core');
 
 async function commitAndPush(files) {
-  const repoTokenInput = core.getInput('repo-token', { required: true });
+  const repoTokenInput = core.getInput('repository-token', { required: true });
   const branchName = core.getInput('commit-branch-name', { required: false });
 
   core.info('Committing new badge');
